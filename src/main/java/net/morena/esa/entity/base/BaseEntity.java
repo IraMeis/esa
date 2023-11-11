@@ -50,4 +50,16 @@ public abstract class BaseEntity implements Serializable {
         return uuid != null ? uuid.hashCode() : 0;
     }
 
+    @PrePersist
+    private void init (){
+        if (this.isDeleted == null)
+            this.isDeleted = false;
+        if (this.createdTimestamp == null)
+            this.createdTimestamp = LocalDateTime.now();
+        if (this.modifiedTimestamp == null)
+            this.modifiedTimestamp = this.createdTimestamp;
+        if (this.uuid == null)
+            this.uuid = UUID.randomUUID();
+    }
+
 }
