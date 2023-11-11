@@ -29,10 +29,10 @@ public class Dish extends BaseEntity {
     private String recipe;
 
     @Column(name = "time_min")
-    private String time_min;
+    private String timeMin;
 
     @Column(name = "time_max")
-    private String time_max;
+    private String timeMax;
 
     @OneToMany
     @Fetch(FetchMode.JOIN)
