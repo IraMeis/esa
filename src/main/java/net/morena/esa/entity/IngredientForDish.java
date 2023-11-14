@@ -16,6 +16,9 @@ import org.hibernate.annotations.FetchMode;
 @EqualsAndHashCode(callSuper = true)
 public class IngredientForDish extends BaseLink {
 
+    @Column(name = "dish_ref")
+    private Long dishRef;
+
     @OneToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "ingredient_ref", referencedColumnName = "unique_id")
