@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
     <!-- Define Persistence Unit -->
-    <persistence-unit name="my_persistence_unit">
-        
+    <persistence-unit name="esa" transaction-type="JTA">
+        <jta-data-source>jdbc/esa</jta-data-source>
+        <class>net.morena.esa.entity.DictUnit</class>
+        <class>net.morena.esa.entity.Ingredient</class>
+        <class>net.morena.esa.entity.Dish</class>
+        <class>net.morena.esa.entity.IngredientForDish</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/esa" />
+            <property name="javax.persistence.jdbc.user" value="esa" />
+            <property name="javax.persistence.jdbc.password" value="esa" />
+        </properties>
     </persistence-unit>
 </persistence>
