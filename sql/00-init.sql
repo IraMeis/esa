@@ -12,8 +12,8 @@ create table dish
     name                   varchar                                                not null,
     portion                double precision         default 1.,
     recipe                 varchar                  default '',
-    time_min               interval,
-    time_max               interval
+    time_min               varchar,
+    time_max               varchar
 );
 
 comment on table dish is 'Таблица, содержащая данные о блюде';
