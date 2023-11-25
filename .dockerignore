@@ -1,0 +1,9 @@
+/.idea
+/.git
+/target
+/sql
+.dockerignore
+.gitignore
+*.yaml
+Dockerfile
+README.md
