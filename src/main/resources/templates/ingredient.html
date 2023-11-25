@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8">
+    <title>ingredient</title>
+</head>
+
+<body>
+<h1>all ingredients</h1>
+<a th:href="@{/ingredient/create}">create new ingredient</a>
+
+<br/>
+
+<table>
+
+    <thead>
+    <tr>
+        <td>№</td>
+        <td>name</td>
+        <td>delete</td>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="ing, idx: ${ingredients}">
+            <td th:utext="${idx.index}+1"></td>
+            <td th:utext="${ing.name}"></td>
+            <td>
+                <form th:action="@{/ingredient/delete/{id}(id=${ing.uniqueId})}" th:method="post">
+                    <div>
+                        <button type="submit">delete</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
