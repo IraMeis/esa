@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>new dish</title>
+</head>
+
+<body>
+<form th:action="@{/dish/create}" th:method="post">
+    <div th:object="${dish}">
+      <div>
+          <label>
+              name
+              <input th:field="*{name}" required>
+          </label>
+          <label>
+              portion
+              <input th:field="*{portion}" type="number" required>
+          </label>
+          <label>
+              recipe
+              <input th:field="*{recipe}" required>
+          </label>
+      </div>
+      <div>
+          <label>
+            min time
+              <input th:field="*{timeMin}" required>
+          </label>
+          <label>
+            max time
+              <input th:field="*{timeMax}" required>
+          </label>
+      </div>
+    </div>
+    <div th:object="${ingDTO}">
+        <div th:each="dto, itemStat : *{ingredients}">
+            <label>
+                ingredient
+                <select th:field="*{ingredients[__${itemStat.index}__].ingredientId}">
+                    <option th:each="i : ${allIngredients}" th:value="${i.uniqueId}" th:text="${i.name}">
+                </select>
+            </label>
+            <label>
+                volume
+                <input th:field="*{ingredients[__${itemStat.index}__].volume}" required>
+            </label>
+            <label>
+                unit
+                <select th:field="*{ingredients[__${itemStat.index}__].unitCode}">
+                    <option th:each="i : ${allUnits}" th:value="${i.code}" th:text="${i.name}">
+                </select>
+            </label>
+        </div>
+    </div>
+    <div>
+        <button type="submit">create</button>
+    </div>
+</form>
+</body>
+
+</html>

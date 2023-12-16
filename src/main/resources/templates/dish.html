@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8">
+    <title>dish</title>
+</head>
+
+<body>
+<h1>all dishes</h1>
+<a th:href="@{/dish/create?ingCount=10}">create new dish</a>
+<p></p>
+
+<table>
+
+    <thead>
+    <tr>
+        <td>№</td>
+        <td>name</td>
+        <td>view</td>
+        <td>delete</td>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="d, idx: ${dishes}">
+            <td th:utext="${idx.index}+1"></td>
+            <td th:utext="${d.name}"></td>
+            <td>
+                <form th:action="@{/dish/view/{id}(id=${d.uniqueId})}" th:method="get">
+                    <div>
+                        <button type="submit">view</button>
+                    </div>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/dish/delete/{id}(id=${d.uniqueId})}" th:method="post">
+                    <div>
+                        <button type="submit">delete</button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

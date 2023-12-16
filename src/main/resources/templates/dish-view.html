@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="utf-8">
+    <title>view dish</title>
+</head>
+
+<body>
+<a th:href="@{/dish}">go back</a>
+<p></p>
+
+<div th:object="${dish}">
+    <div>
+        <p>
+            <div>name :
+                <span th:utext="*{name}"></span>
+            </div>
+        </p>
+        <p>
+            <div>recipe :
+                <span th:utext="*{recipe}"></span>
+            </div>
+        </p>
+        <p>
+            <div>portion :
+                <span th:utext="*{portion}"></span>
+            </div>
+        </p>
+        <p>
+            <div>min time :
+                <span th:utext="*{timeMin}"></span>
+            </div>
+        </p>
+        <p>
+            <div>max time :
+                <span th:utext="*{timeMax}"></span>
+            </div>
+        </p>
+    </div>
+    <p>ingredients :</p>
+    <div th:each="ing, itemStat : *{ingredientForDish}">
+        <p>
+            <div >number :
+                <span th:utext="${itemStat.index + 1}"></span>
+            </div>
+            <div>name :
+                <span th:utext="${ing.ingredient.name}"></span>
+            </div>
+            <div>volume :
+                <span th:utext="${ing.volume}"></span>
+            </div>
+            <div>unit :
+                <span th:utext="${ing.unit.name}"></span>
+            </div>
+        </p>
+    </div>
+</div>
+</body>
+
+</html>
