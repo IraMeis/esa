@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <form th:action="@{/ingredient/create}" th:method="post" th:object="${ingredient}">
+  <form th:action="@{/api/v1/ingredient/create}" th:method="post" th:object="${ingredient}">
     <label>
       name
       <input th:field="*{name}" required>

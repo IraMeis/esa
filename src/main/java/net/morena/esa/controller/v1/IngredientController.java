@@ -1,4 +1,4 @@
-package net.morena.esa.controller;
+package net.morena.esa.controller.v1;
 
 
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/ingredient")
+@RequestMapping("/api/v1/ingredient")
 public class IngredientController {
 
     private final IngredientService ingredientService;
@@ -31,13 +31,13 @@ public class IngredientController {
     @PostMapping("/create")
     public String postCreate(@ModelAttribute Ingredient ingredient) {
         ingredientService.create(ingredient);
-        return "redirect:/ingredient";
+        return "redirect:/api/v1/ingredient";
     }
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
         ingredientService.deleteById(id);
-        return "redirect:/ingredient";
+        return "redirect:/api/v1/ingredient";
     }
 
 }

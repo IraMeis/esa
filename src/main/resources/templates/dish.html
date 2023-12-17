@@ -8,7 +8,7 @@
 
 <body>
 <h1>all dishes</h1>
-<a th:href="@{/dish/create?ingCount=10}">create new dish</a>
+<a th:href="@{/api/v1/dish/create?ingCount=10}">create new dish</a>
 <p></p>
 
 <table>
@@ -27,14 +27,14 @@
             <td th:utext="${idx.index}+1"></td>
             <td th:utext="${d.name}"></td>
             <td>
-                <form th:action="@{/dish/view/{id}(id=${d.uniqueId})}" th:method="get">
+                <form th:action="@{/api/v1/dish/view/{id}(id=${d.uniqueId})}" th:method="get">
                     <div>
                         <button type="submit">view</button>
                     </div>
                 </form>
             </td>
             <td>
-                <form th:action="@{/dish/delete/{id}(id=${d.uniqueId})}" th:method="post">
+                <form th:action="@{/api/v1/dish/delete/{id}(id=${d.uniqueId})}" th:method="post">
                     <div>
                         <button type="submit">delete</button>
                     </div>

@@ -8,11 +8,44 @@
 
 <body>
 <h1>Привет еда</h1>
-<p></p>
-<a th:href="@{/dish}">all dishes</a>
-<a th:href="@{/dish/create?ingCount=10}">new dish</a>
-<a th:href="@{/ingredient}">all ingredients</a>
-<a th:href="@{/ingredient/create}">new ingredient</a>
+<p>api v1 - spring mvc</p>
+<div>
+    <a th:href="@{/api/v1/dish}">view all dishes</a>
+</div>
+<div>
+    <a th:href="@{/api/v1/dish/create?ingCount=10}">create new dish</a>
+</div>
+<div>
+    <a th:href="@{/api/v1/ingredient}">view all ingredients</a>
+</div>
+<div>
+    <a th:href="@{/api/v1/ingredient/create}">create new ingredient</a>
+</div>
+
+<p>api v2 - spring rest, json|xml + xslt</p>
+<div>
+    <label>GET /api/v2/dish/all</label>
+    <a th:href="@{/api/v2/dish/all}">view all dishes</a>
+</div>
+<div>
+    <label>GET /api/v2/dish/{id}</label>
+</div>
+<div>
+    <label>POST /api/v2/dish/create</label>
+</div>
+<div>
+    <label>POST /api/v2/dish/delete/{id}</label>
+</div>
+<div>
+    <label>GET /api/v2/ingredient/all</label>
+    <a th:href="@{/api/v2/ingredient/all}">view all ingredients</a>
+</div>
+<div>
+    <label>POST /api/v2/ingredient/create</label>
+</div>
+<div>
+    <label>POST /api/v2/ingredient/delete/{id}</label>
+</div>
 </body>
 
 </html>

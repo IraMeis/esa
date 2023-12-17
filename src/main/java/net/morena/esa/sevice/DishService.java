@@ -2,6 +2,7 @@ package net.morena.esa.sevice;
 
 
 import lombok.RequiredArgsConstructor;
+import net.morena.esa.dto.DishDTO;
 import net.morena.esa.dto.IngredientForDishCreationDTO;
 import net.morena.esa.dto.SimpleIngredientDTO;
 import net.morena.esa.entity.Dish;
@@ -43,11 +44,36 @@ public class DishService {
         model.addAttribute("dish", new Dish());
         IngredientForDishCreationDTO ing = new IngredientForDishCreationDTO();
         for (int i = 0; i < ingCount; ++i)
-            ing.addSimpleIngredient(new SimpleIngredientDTO());
+            ing.addSimpleIngredient(SimpleIngredientDTO.builder().build());
         model.addAttribute("ingDTO", ing);
     }
 
     public void create(Dish dish, IngredientForDishCreationDTO dto) {
+        dishRepo.saveAndFlush(dish);
+
+        Set<IngredientForDish> ingredientForDishes = new HashSet<>();
+        for (int i = 0; i < dto.getIngredients().size(); ++i){
+            IngredientForDish ingredientForDish = new IngredientForDish();
+            ingredientForDish.setDishRef(dish.getUniqueId());
+            ingredientForDish.setIngredient(
+                    ingredientService.getById(dto.getIngredients().get(i).getIngredientId()));
+            ingredientForDish.setVolume(dto.getIngredients().get(i).getVolume());
+            ingredientForDish.setUnit(
+                    dictUnitRepo.getByCodeAndIsDeletedFalse(dto.getIngredients().get(i).getUnitCode()));
+            ingredientForDishRepo.save(ingredientForDish);
+            ingredientForDishes.add(ingredientForDish);
+        }
+        dish.setIngredientForDish(ingredientForDishes);
+    }
+
+    public void create(DishDTO dto) {
+        Dish dish = Dish.builder()
+                .name(dto.getName())
+                .portion(dto.getPortion())
+                .recipe(dto.getRecipe())
+                .timeMax(dto.getTimeMax())
+                .timeMin(dto.getTimeMin())
+                .build();
         dishRepo.saveAndFlush(dish);
 
         Set<IngredientForDish> ingredientForDishes = new HashSet<>();

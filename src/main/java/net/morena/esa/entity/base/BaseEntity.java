@@ -1,6 +1,7 @@
 package net.morena.esa.entity.base;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -27,10 +28,12 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "uuid")
     private UUID uuid;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Column(name = "created_timestamp")
     @CreationTimestamp
     private LocalDateTime createdTimestamp;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Column(name = "modified_timestamp")
     @UpdateTimestamp
     private LocalDateTime modifiedTimestamp;
