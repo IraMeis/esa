@@ -101,3 +101,51 @@ comment on column link_dish_ingredient.dish_ref  is 'Ссылка на блюд�
 comment on column link_dish_ingredient.ingredient_ref is 'Ссылка на ингредиент';
 comment on column link_dish_ingredient.volume  is 'Количество ингредиента (в ед. измерения)';
 comment on column link_dish_ingredient.unit is 'Единица измерения';
+
+
+create table log_event
+(
+    unique_id              bigserial constraint log_event_pkey primary key,
+    uuid                   uuid                     default uuid_generate_v4()    not null,
+    created_timestamp      timestamp with time zone default statement_timestamp() not null,
+    modified_timestamp     timestamp with time zone default statement_timestamp() not null,
+    is_deleted             boolean                  default false                 not null,
+
+    event_type               varchar                                              not null,
+    table_name               varchar                                              not null,
+    description              varchar
+);
+
+comment on table log_event is 'Таблица, содержащая логи изменений данных таблиц';
+comment on column log_event.unique_id is 'Идентификатор записи. Первичный ключ';
+comment on column log_event.uuid is 'uuid объекта';
+comment on column log_event.created_timestamp is 'Дата и время создания записи';
+comment on column log_event.modified_timestamp is 'Дата и время последнего изменения записи';
+comment on column log_event.is_deleted is 'Признак удалённой записи';
+
+comment on column log_event.event_type is 'Тип изменения';
+comment on column log_event.table_name is 'Таблица, в которой произошли изменения';
+comment on column log_event.description is 'Доп. информация';
+
+
+create table mail_condition
+(
+    unique_id              bigserial constraint mail_condition_pkey primary key,
+    uuid                   uuid                     default uuid_generate_v4()    not null,
+    created_timestamp      timestamp with time zone default statement_timestamp() not null,
+    modified_timestamp     timestamp with time zone default statement_timestamp() not null,
+    is_deleted             boolean                  default false                 not null,
+
+    address               varchar                                                 not null,
+    condition             varchar                                                 not null
+);
+
+comment on table mail_condition is 'Таблица, содержащая единицы измерения ингридиентов';
+comment on column mail_condition.unique_id is 'Идентификатор записи. Первичный ключ';
+comment on column mail_condition.uuid is 'uuid объекта';
+comment on column mail_condition.created_timestamp is 'Дата и время создания записи';
+comment on column mail_condition.modified_timestamp is 'Дата и время последнего изменения записи';
+comment on column mail_condition.is_deleted is 'Признак удалённой записи';
+
+comment on column mail_condition.address is 'Email';
+comment on column mail_condition.condition is 'Условие для отправки письма';

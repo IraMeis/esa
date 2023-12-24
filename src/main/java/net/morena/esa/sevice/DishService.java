@@ -7,9 +7,11 @@ import net.morena.esa.dto.IngredientForDishCreationDTO;
 import net.morena.esa.dto.SimpleIngredientDTO;
 import net.morena.esa.entity.Dish;
 import net.morena.esa.entity.IngredientForDish;
+import net.morena.esa.jms.Producer;
 import net.morena.esa.repository.DictUnitRepo;
 import net.morena.esa.repository.DishRepo;
 import net.morena.esa.repository.IngredientForDishRepo;
+import net.morena.esa.jms.utils.EventType;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -25,6 +27,7 @@ public class DishService {
     private final DishRepo dishRepo;
     private final DictUnitRepo dictUnitRepo;
     private final IngredientForDishRepo ingredientForDishRepo;
+    private final Producer producer;
 
     public List<Dish> getAll() {
         return dishRepo.findAllByIsDeletedFalse();
@@ -35,7 +38,10 @@ public class DishService {
     }
 
     public void deleteById(Long id) {
-        dishRepo.deleteById(id);
+        var entity = dishRepo.findOneByUniqueId(id);
+        entity.setIsDeleted(true);
+        dishRepo.save(entity);
+        producer.sendMessage(entity, EventType.delete);
     }
 
     public void setParamsForDish(Model model, int ingCount) {
@@ -64,6 +70,7 @@ public class DishService {
             ingredientForDishes.add(ingredientForDish);
         }
         dish.setIngredientForDish(ingredientForDishes);
+        producer.sendMessage(dish, EventType.create);
     }
 
     public void create(DishDTO dto) {
@@ -89,6 +96,7 @@ public class DishService {
             ingredientForDishes.add(ingredientForDish);
         }
         dish.setIngredientForDish(ingredientForDishes);
+        producer.sendMessage(dish, EventType.create);
     }
 
 }

@@ -10,3 +10,6 @@ insert into link_dish_ingredient (dish_ref, ingredient_ref, volume, unit)
 values (1, 2, null, null),
        (2, 1, 1., 9);
 
+--insert into mail_condition (address, condition)
+--values ('example1@gmail.com', '{delete : [any], create : [dish]}'),
+--       ('example2@gmail.com', '{delete : [dish]}');
